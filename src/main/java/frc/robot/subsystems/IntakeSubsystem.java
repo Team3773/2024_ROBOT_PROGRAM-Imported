@@ -1,17 +1,25 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType; 
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
+ 
+  private CANSparkMax m_armMotor;
 
-  com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new WPI_TalonSRX(RobotMap.m_armMotorPort);
+  //com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax for neo 1.1 motor
   
-  
+
+  public IntakeSubsystem(CANSparkMax m_armMotor) {
+    this.m_armMotor = m_armMotor;
+  }
+
   public IntakeSubsystem() {
+
+  m_armMotor = new CANSparkMax (RobotMap.m_armMotorPort,MotorType.kBrushless);
     m_armMotor.setInverted(false);
   }
 

@@ -7,6 +7,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class NoteIntakeCommand extends Command {
   /** Creates a new BallIntakeCommand. */
+  
  IntakeSubsystem intakeSubsystem;
   private final double intakeSpeed = 0.8;
   BooleanSupplier leftBumper;
