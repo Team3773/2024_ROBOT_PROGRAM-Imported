@@ -9,18 +9,15 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
  
   private CANSparkMax m_armMotor;
-
+  private CANSparkMax m_noteLock;
   //com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax for neo 1.1 motor
   
-
-  public IntakeSubsystem(CANSparkMax m_armMotor) {
-    this.m_armMotor = m_armMotor;
-  }
 
   public IntakeSubsystem() {
 
   m_armMotor = new CANSparkMax (RobotMap.m_armMotorPort,MotorType.kBrushless);
     m_armMotor.setInverted(false);
+  m_noteLock = new CANSparkMax (RobotMap.m_noteLockPort,MotorType.kBrushless);
   }
 
   @Override

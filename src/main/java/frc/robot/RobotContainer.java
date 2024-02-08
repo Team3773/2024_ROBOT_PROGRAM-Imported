@@ -10,18 +10,18 @@ import frc.robot.commands.NoteIntakeCommand;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.RobotMap;
+//import frc.robot.subsystems.RobotMap;
 
 /** Add your docs here. */
 public class RobotContainer {
 
     // This is where robot subsystems are initialized.
     public final DriveSubsystem m_drive = new DriveSubsystem();
-    public final IntakeSubsystem m_feeder = new IntakeSubsystem();
+    public final IntakeSubsystem m_arm = new IntakeSubsystem();
 
     // Define xbox controller with port mapping.
-    private final XboxController controller = new XboxController(RobotMap.XboxControllerPort);
-    private final XboxController controller2 = new XboxController(RobotMap.XboxControllerPort2);
+    private final XboxController controller = new XboxController(0);
+    private final XboxController controller2 = new XboxController(1);
     // Constructor for the RobotContainer Class.
     public RobotContainer() {
         // Set Default Command for the drivetrain subsystem. This will be active during
@@ -33,8 +33,8 @@ public class RobotContainer {
                 () -> controller.getLeftY()));
 
         // Set Default Command for the Note Intake Subsystem
-        m_feeder.setDefaultCommand(new NoteIntakeCommand(
-                m_feeder,
+        m_arm.setDefaultCommand(new NoteIntakeCommand(
+                m_arm,
                 () -> controller2.getLeftBumper(),
                 () -> controller2.getRightBumper()));
     }
