@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class NoteIntakeCommand extends Command {
-  /** Creates a new BallIntakeCommand. */
+  /** Creates a new NoteIntakeCommand. */
   
  IntakeSubsystem intakeSubsystem;
   private final double intakeSpeed = 0.8;

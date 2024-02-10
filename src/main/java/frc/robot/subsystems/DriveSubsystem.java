@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.revrobotics.RelativeEncoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -18,11 +19,10 @@ public class DriveSubsystem extends SubsystemBase {
   private WPI_TalonSRX m_rightMotorFollower;
   private DifferentialDrive drive;
 
-  // private static final double kTrackWidth = 0.381 * 2; // meters
-  // private static final double kWheelRadius = 0.0508; // meters
-  // private static final int kEncoderResolution = 4096;
-  /** Creates a new DriveTrain. */
-
+  /* private static final double kTrackWidth = 0.381 * 2; // meters
+  private static final double kWheelRadius = 0.0508; // meters
+  private static final int kEncoderResolution = 4096;
+   Creates a new DriveTrain. */
   public DriveSubsystem() {
     m_leftMotor = new WPI_TalonSRX(RobotMap.m_leftMotorPort);
     m_rightMotor = new WPI_TalonSRX(RobotMap.m_rightMotorPort);
