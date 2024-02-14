@@ -31,7 +31,7 @@ public class TeleopDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_DriveSubsystem.arcadeDrive(xAxis.getAsDouble(), yAxis.getAsDouble());
+    m_DriveSubsystem.arcadeDrive(yAxis.getAsDouble(), xAxis.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

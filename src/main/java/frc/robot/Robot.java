@@ -19,8 +19,8 @@ import frc.robot.subsystems.RobotMap;
  */
 
 public class Robot extends TimedRobot {
-  private final DifferentialDrive m_robotDrive
-  = new DifferentialDrive(new Talon(RobotMap.m_leftMotorPort), new Talon(RobotMap.m_rightMotorPort));
+ // private final DifferentialDrive m_robotDrive
+  //= new DifferentialDrive(new Talon(RobotMap.m_leftMotorPort), new Talon(RobotMap.m_rightMotorPort));
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
