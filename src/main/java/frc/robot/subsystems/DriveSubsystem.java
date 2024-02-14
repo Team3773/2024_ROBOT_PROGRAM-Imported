@@ -18,7 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
   private WPI_TalonSRX m_leftMotorFollower;
   private WPI_TalonSRX m_rightMotorFollower;
   private DifferentialDrive drive;
-
+  
   /* private static final double kTrackWidth = 0.381 * 2; // meters
   private static final double kWheelRadius = 0.0508; // meters
   private static final int kEncoderResolution = 4096;
@@ -31,9 +31,19 @@ public class DriveSubsystem extends SubsystemBase {
     m_leftMotorFollower.follow(m_leftMotor);
     m_rightMotorFollower.follow(m_rightMotor);
     drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    m_leftMotor.setSafetyEnabled(true);
+    m_leftMotor.setSafetyEnabled(false);
+    m_leftMotor.setExpiration(.1);
+    m_leftMotor.feed();
+    m_rightMotor.setSafetyEnabled(true);
+    m_rightMotor.setSafetyEnabled(false);
+    m_rightMotor.setExpiration(.1);
+    m_rightMotor.feed();
   }
-
+  
   public void arcadeDrive(double speed, double rotation) {
-    drive.arcadeDrive(speed, rotation);
+    speed = speed * 0.01;
+    drive.arcadeDrive(speed, rotation); 
+    
   }
 }

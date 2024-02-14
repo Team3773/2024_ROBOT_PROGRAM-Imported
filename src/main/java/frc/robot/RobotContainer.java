@@ -20,8 +20,8 @@ public class RobotContainer {
     public final IntakeSubsystem m_arm = new IntakeSubsystem();
 
     // Define xbox controller with port mapping.
-    private final XboxController controller = new XboxController(0);
-    private final XboxController controller2 = new XboxController(1);
+    private  XboxController controller = new XboxController(0);
+    private  XboxController controller2 = new XboxController(1);
     // Constructor for the RobotContainer Class.
     public RobotContainer() {
         // Set Default Command for the drivetrain subsystem. This will be active during
