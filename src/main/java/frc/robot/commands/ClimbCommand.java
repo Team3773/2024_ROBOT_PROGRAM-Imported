@@ -9,13 +9,13 @@ public class ClimbCommand extends Command {
     /*Creates a new Climb Command */
    ClimbSubsystem ClimbSubsystem;
   private final double climbSpeed = 0.45;
-  BooleanSupplier leftTrigger;
-  BooleanSupplier rightTrigger;
+  BooleanSupplier leftTriggerAxis;
+  BooleanSupplier rightTriggerAxis;
 
-  public ClimbCommand(ClimbSubsystem climbSubsystem, BooleanSupplier leftTrigger, BooleanSupplier rightTrigger) {
+  public ClimbCommand(ClimbSubsystem climbSubsystem, BooleanSupplier leftTriggerAxis, BooleanSupplier rightTriggerAxis) {
     this.ClimbSubsystem = climbSubsystem;
-    this.leftTrigger = leftTrigger;
-    this.rightTrigger = rightTrigger;
+    this.leftTriggerAxis = leftTriggerAxis;
+    this.rightTriggerAxis = rightTriggerAxis;
     addRequirements(climbSubsystem);
   }
 
@@ -28,9 +28,9 @@ public class ClimbCommand extends Command {
   @Override
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
-    if(leftTrigger.getAsBoolean()){
+    if(leftTriggerAxis.getAsBoolean()){
       ClimbSubsystem.runLift(climbSpeed);
-    }else if(rightTrigger.getAsBoolean()){
+    }else if(rightTriggerAxis.getAsBoolean()){
       ClimbSubsystem.runLift(-climbSpeed);
     }else{
       ClimbSubsystem.stopLift();

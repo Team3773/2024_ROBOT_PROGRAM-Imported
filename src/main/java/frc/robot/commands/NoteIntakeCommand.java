@@ -9,7 +9,7 @@ public class NoteIntakeCommand extends Command {
   /** Creates a new NoteIntakeCommand. */
   
  IntakeSubsystem intakeSubsystem;
-  private final double intakeSpeed = 0.8;
+  private final double intakeSpeed = 0.3;
   BooleanSupplier leftBumper;
   BooleanSupplier rightBumper;
 

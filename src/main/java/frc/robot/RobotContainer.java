@@ -6,8 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.NoteIntakeCommand;
 import frc.robot.commands.TeleopDrive;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 //import frc.robot.subsystems.RobotMap;
@@ -18,6 +20,7 @@ public class RobotContainer {
     // This is where robot subsystems are initialized.
     public final DriveSubsystem m_drive = new DriveSubsystem();
     public final IntakeSubsystem m_arm = new IntakeSubsystem();
+    public final ClimbSubsystem m_climb = new ClimbSubsystem();
 
     // Define xbox controller with port mapping.
     private  XboxController controller = new XboxController(0);
@@ -37,6 +40,12 @@ public class RobotContainer {
                 m_arm,
                 () -> controller2.getLeftBumper(),
                 () -> controller2.getRightBumper()));
+
+        // Set Default Command for the Climb Subsystem
+        m_climb.setDefaultCommand(new ClimbCommand(
+                m_climb,
+                () -> controller.getLeftBumper(),
+                () -> controller.getRightBumper()));
     }
     public Command getAutonomousCommand() {
         return null;
