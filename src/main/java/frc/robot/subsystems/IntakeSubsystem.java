@@ -99,16 +99,15 @@ public class IntakeSubsystem extends SubsystemBase {
     currentRotationSetpoint -= armRotationStepValue;
   }
 
-  public void runIntake(double speed) {
+  public void runLift(double speed) {
     System.out.println("Intake speed:" + speed * speedModifier);    
     m_armMotor.set(speed * speedModifier);
   }
 
-  public void stopIntake() {
+  public void stopLift() {
     var speed = 0;
     System.out.println("Intake speed:" + speed);
     m_armMotor.set(speed);
-
   }
 
 }

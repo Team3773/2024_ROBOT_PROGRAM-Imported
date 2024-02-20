@@ -30,18 +30,18 @@ public class NoteIntakeCommand extends Command {
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
     if(leftBumper.getAsBoolean()){
-      intakeSubsystem.runIntake(intakeSpeed);
+      intakeSubsystem.runLift(intakeSpeed);
     }else if(rightBumper.getAsBoolean()){
-      intakeSubsystem.runIntake(-intakeSpeed);
+      intakeSubsystem.runLift(-intakeSpeed);
     }else{
-      intakeSubsystem.stopIntake();
+      intakeSubsystem.stopLift();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSubsystem.stopIntake();
+    intakeSubsystem.stopLift();
   }
 
   // Returns true when the command should end.

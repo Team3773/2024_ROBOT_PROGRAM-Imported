@@ -27,7 +27,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftLiftMotor = new CANSparkMax(RobotMap.m_leftLiftMotorPort, MotorType.kBrushless);
     m_leftLiftMotor.restoreFactoryDefaults();
     m_leftLiftMotor.setInverted(false);
-    m_rightLiftMotor = new CANSparkMax(RobotMap.m_leftLiftMotorPort, MotorType.kBrushless);
+    m_rightLiftMotor = new CANSparkMax(RobotMap.m_rightLiftMotorPort, MotorType.kBrushless);
     m_rightLiftMotor.restoreFactoryDefaults();
     m_rightLiftMotor.setInverted(true);
 
@@ -105,25 +105,16 @@ public class ClimbSubsystem extends SubsystemBase {
     currentRotationSetpoint -= armRotationStepValue;
   }
 
-  public void runIntake(double speed) {
+  public void runLift(double speed) {
     System.out.println("Intake speed:" + speed * speedModifier);    
     m_leftLiftMotor.set(speed * speedModifier);
     m_rightLiftMotor.set(speed * speedModifier);
   }
 
-  public void stopIntake() {
+  public void stopLift() {
     var speed = 0;
     System.out.println("Intake speed:" + speed);
     m_leftLiftMotor.set(speed);
     m_rightLiftMotor.set(speed);
   }
-
-  public void runLift(double climbSpeed) {
-    throw new UnsupportedOperationException("Unimplemented method 'runLift'");
-  }
-
-public void stopLift() {
-    throw new UnsupportedOperationException("Unimplemented method 'stopLift'");
-}
-
 }

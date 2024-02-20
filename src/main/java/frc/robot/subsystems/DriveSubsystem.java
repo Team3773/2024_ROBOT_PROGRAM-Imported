@@ -7,12 +7,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import com.revrobotics.RelativeEncoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private static final double kMaxSpeed = 3.0; // meters per second
-  private static final double kMaxAngularSpeed = 2 * Math.PI; // one rotation
+  //private static final double kMaxSpeed = 3.0; // meters per second
+  //private static final double kMaxAngularSpeed = 2 * Math.PI; // one rotation
   private WPI_TalonSRX m_leftMotor;
   private WPI_TalonSRX m_rightMotor;
   private WPI_TalonSRX m_leftMotorFollower;
