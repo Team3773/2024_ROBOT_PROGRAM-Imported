@@ -6,10 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.ClimbCommand;
+import frc.robot.commands.LeftClimbCommand;
+import frc.robot.commands.RightClimbCommand;
 import frc.robot.commands.NoteIntakeCommand;
 import frc.robot.commands.TeleopDrive;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.LeftClimbSubsystem;
+import frc.robot.subsystems.RightClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 //import frc.robot.subsystems.RobotMap;
@@ -20,7 +22,8 @@ public class RobotContainer {
     // This is where robot subsystems are initialized.
     public final DriveSubsystem m_drive = new DriveSubsystem();
     public final IntakeSubsystem m_arm = new IntakeSubsystem();
-    public final ClimbSubsystem m_climb = new ClimbSubsystem();
+    public final LeftClimbSubsystem m_leftclimb = new LeftClimbSubsystem();
+    public final RightClimbSubsystem m_rightclimb = new RightClimbSubsystem();
 
     // Define xbox controller with port mapping.
     private  XboxController controller = new XboxController(0);
@@ -38,14 +41,18 @@ public class RobotContainer {
         // Set Default Command for the Note Intake Subsystem
         m_arm.setDefaultCommand(new NoteIntakeCommand(
                 m_arm,
+                () -> controller2.getAButton(),
+                () -> controller2.getBButton()));
+        
+        m_leftclimb.setDefaultCommand(new LeftClimbCommand(
+                m_leftclimb,
                 () -> controller2.getLeftBumper(),
-                () -> controller2.getRightBumper()));
-
-        // Set Default Command for the Climb Subsystem
-        m_climb.setDefaultCommand(new ClimbCommand(
-                m_climb,
-                () -> controller.getLeftBumper(),
-                () -> controller.getRightBumper()));
+                () -> controller2.getLeftTriggerAxis()));
+        
+        m_rightclimb.setDefaultCommand(new RightClimbCommand(
+                m_rightclimb,
+                () -> controller2.getRightBumper(),
+                () -> controller2.getRightTriggerAxis()));       
     }
     public Command getAutonomousCommand() {
         return null;
