@@ -7,14 +7,15 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-public class RightClimbSubsystem extends SubsystemBase {
+public class ClimbSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
 
-  private CANSparkMax m_rightLiftMotor;
+  private CANSparkMax m_LiftMotor;
   private SparkPIDController m_pidController;
   private RelativeEncoder m_encoder;
   private static final double speedModifier = .5;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
+  private String smartDashboardPrefix = "";
 
   double currentRotationSetpoint = 0;
   double armRotationStepValue = 0.01;
@@ -22,14 +23,16 @@ public class RightClimbSubsystem extends SubsystemBase {
   // WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax
   // for neo 1.1 motor
 
-  public RightClimbSubsystem() {
-    m_rightLiftMotor = new CANSparkMax(RobotMap.m_leftLiftMotorPort, MotorType.kBrushless);
-    m_rightLiftMotor.restoreFactoryDefaults();
-    m_rightLiftMotor.setInverted(false);
+  public ClimbSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix){
+    m_LiftMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
+    m_LiftMotor.restoreFactoryDefaults();
+    m_LiftMotor.setInverted(invertMotor);
 
-    m_pidController = m_rightLiftMotor.getPIDController();
+    this.smartDashboardPrefix = smartDashboardPrefix;
+
+    m_pidController = m_LiftMotor.getPIDController();
     // Encoder object created to display position values
-    m_encoder = m_rightLiftMotor.getEncoder();
+    m_encoder = m_LiftMotor.getEncoder();
     //Might be required to initialize the encoder if it is in a known location on startup.
     //m_encoder.setPosition(0);
     // Brake is not needed with the PID Controller holding position
@@ -51,14 +54,14 @@ public class RightClimbSubsystem extends SubsystemBase {
   }
 
   public void initDashboard(){
-    SmartDashboard.putNumber("P Gain", kP);
-    SmartDashboard.putNumber("I Gain", kI);
-    SmartDashboard.putNumber("D Gain", kD);
-    SmartDashboard.putNumber("I Zone", kIz);
-    SmartDashboard.putNumber("Feed Forward", kFF);
-    SmartDashboard.putNumber("Max Output", kMaxOutput);
-    SmartDashboard.putNumber("Min Output", kMinOutput);
-    SmartDashboard.putNumber("Set Rotations", currentRotationSetpoint);
+    SmartDashboard.putNumber(smartDashboardPrefix + "P Gain", kP);
+    SmartDashboard.putNumber(smartDashboardPrefix + "I Gain", kI);
+    SmartDashboard.putNumber(smartDashboardPrefix + "D Gain", kD);
+    SmartDashboard.putNumber(smartDashboardPrefix + "I Zone", kIz);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Feed Forward", kFF);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Max Output", kMaxOutput);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Min Output", kMinOutput);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Set Rotations", currentRotationSetpoint);
   }
 
   @Override
@@ -66,14 +69,14 @@ public class RightClimbSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     // read PID coefficients from SmartDashboard
-    double p = SmartDashboard.getNumber("P Gain", 0);
-    double i = SmartDashboard.getNumber("I Gain", 0);
-    double d = SmartDashboard.getNumber("D Gain", 0);
-    double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Feed Forward", 0);
-    double max = SmartDashboard.getNumber("Max Output", 0);
-    double min = SmartDashboard.getNumber("Min Output", 0);
-    currentRotationSetpoint = SmartDashboard.getNumber("Set Rotations", 0);
+    double p = SmartDashboard.getNumber(smartDashboardPrefix + "P Gain", 0);
+    double i = SmartDashboard.getNumber(smartDashboardPrefix + "I Gain", 0);
+    double d = SmartDashboard.getNumber(smartDashboardPrefix + "D Gain", 0);
+    double iz = SmartDashboard.getNumber(smartDashboardPrefix + "I Zone", 0);
+    double ff = SmartDashboard.getNumber(smartDashboardPrefix + "Feed Forward", 0);
+    double max = SmartDashboard.getNumber(smartDashboardPrefix + "Max Output", 0);
+    double min = SmartDashboard.getNumber(smartDashboardPrefix + "Min Output", 0);
+    currentRotationSetpoint = SmartDashboard.getNumber(smartDashboardPrefix + "Set Rotations", 0);
 
     // if PID coefficients on SmartDashboard have changed, write new values to controller
     if((p != kP)) { m_pidController.setP(p); kP = p; }
@@ -88,8 +91,8 @@ public class RightClimbSubsystem extends SubsystemBase {
     m_pidController.setReference(currentRotationSetpoint, CANSparkMax.ControlType.kPosition);
     
     
-    SmartDashboard.putNumber("Note Arm setPoint", currentRotationSetpoint);
-    SmartDashboard.putNumber("Note Arm Encoder Position", m_encoder.getPosition());
+    SmartDashboard.putNumber(smartDashboardPrefix + "Note Arm setPoint", currentRotationSetpoint);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Note Arm Encoder Position", m_encoder.getPosition());
   }
 
   public void incrementArmPosition(){
@@ -100,14 +103,13 @@ public class RightClimbSubsystem extends SubsystemBase {
   }
 
   public void runLift(double speed) {
-    System.out.println("Intake speed:" + speed * speedModifier);    
-    m_rightLiftMotor.set(speed * speedModifier);
+    System.out.println(smartDashboardPrefix + "Intake speed:" + speed * speedModifier);    
+    m_LiftMotor.set(speed * speedModifier);
   }
 
   public void stopLift() {
     var speed = 0;
-    System.out.println("Intake speed:" + speed);
-    m_rightLiftMotor.set(speed);
+    System.out.println(smartDashboardPrefix + "Intake speed:" + speed);
+    m_LiftMotor.set(speed);
   }
 }
-
