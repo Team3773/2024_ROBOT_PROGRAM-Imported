@@ -63,7 +63,7 @@ public class RobotContainer {
                 m_RightClimbSubsystem.setDefaultCommand(new ClimbCommand(
                                 m_RightClimbSubsystem,
                                 () -> controller2.getRightBumper(),
-                                getBooleanSupplier(() -> controller2.getLeftTriggerAxis())));
+                                getBooleanSupplier(() -> controller2.getRightTriggerAxis())));
         }
 
         public Command getAutonomousCommand() {
