@@ -30,7 +30,7 @@ public class RobotContainer {
         public final IntakeSubsystem m_arm = new IntakeSubsystem();
         public final ClimbSubsystem m_LeftClimbSubsystem = new ClimbSubsystem(RobotMap.m_leftLiftMotorPort, false,
                         "Left Lift ");
-        public final ClimbSubsystem m_RightClimbSubsystem = new ClimbSubsystem(RobotMap.m_rightLiftMotorPort, false,
+        public final ClimbSubsystem m_RightClimbSubsystem = new ClimbSubsystem(RobotMap.m_rightLiftMotorPort, true,
                         "Right Lift ");
 
         // public final RightClimbSubsystem m_rightclimb = new RightClimbSubsystem();

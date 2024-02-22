@@ -91,8 +91,8 @@ public class ClimbSubsystem extends SubsystemBase {
     m_pidController.setReference(currentRotationSetpoint, CANSparkMax.ControlType.kPosition);
     
     
-    SmartDashboard.putNumber(smartDashboardPrefix + "Note Arm setPoint", currentRotationSetpoint);
-    SmartDashboard.putNumber(smartDashboardPrefix + "Note Arm Encoder Position", m_encoder.getPosition());
+    SmartDashboard.putNumber(smartDashboardPrefix + "Lift setPoint", currentRotationSetpoint);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Lift Encoder Position", m_encoder.getPosition());
   }
 
   public void incrementArmPosition(){

@@ -9,7 +9,7 @@ public class NoteIntakeCommand extends Command {
   /** Creates a new NoteIntakeCommand. */
   
  IntakeSubsystem intakeSubsystem;
-  private final double intakeSpeed = 0.3;
+  private final double intakeSpeed = 0.45;
   BooleanSupplier aButton;
   BooleanSupplier bButton;
 
@@ -29,9 +29,9 @@ public class NoteIntakeCommand extends Command {
   @Override
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
-    if(aButton.getAsBoolean()){
+    if(bButton.getAsBoolean()){
       intakeSubsystem.runLift(intakeSpeed);
-    }else if(bButton.getAsBoolean()){
+    }else if(aButton.getAsBoolean()){
       intakeSubsystem.runLift(-intakeSpeed);
     }else{
       intakeSubsystem.stopLift();
