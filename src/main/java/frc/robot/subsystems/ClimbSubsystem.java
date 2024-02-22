@@ -91,8 +91,8 @@ public class ClimbSubsystem extends SubsystemBase {
     m_pidController.setReference(currentRotationSetpoint, CANSparkMax.ControlType.kPosition);
     
     
-    SmartDashboard.putNumber(smartDashboardPrefix + "Lift setPoint", currentRotationSetpoint);
-    SmartDashboard.putNumber(smartDashboardPrefix + "Lift Encoder Position", m_encoder.getPosition());
+    SmartDashboard.putNumber(smartDashboardPrefix + "setPoint", currentRotationSetpoint);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Encoder Position", m_encoder.getPosition());
   }
 
   public void incrementArmPosition(){
@@ -103,13 +103,13 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   public void runLift(double speed) {
-    System.out.println(smartDashboardPrefix + "Intake speed:" + speed * speedModifier);    
+    System.out.println(smartDashboardPrefix + "Lift speed:" + speed * speedModifier);    
     m_LiftMotor.set(speed * speedModifier);
   }
 
   public void stopLift() {
     var speed = 0;
-    System.out.println(smartDashboardPrefix + "Intake speed:" + speed);
+    System.out.println(smartDashboardPrefix + "Lift speed:" + speed);
     m_LiftMotor.set(speed);
   }
 }
