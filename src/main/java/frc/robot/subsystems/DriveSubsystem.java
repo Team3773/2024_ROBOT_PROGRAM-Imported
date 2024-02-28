@@ -32,19 +32,11 @@ public class DriveSubsystem extends SubsystemBase {
     m_leftMotorFollower.follow(m_leftMotor);
     m_rightMotorFollower.follow(m_rightMotor);
     drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
-    m_leftMotor.setSafetyEnabled(true);
-    m_leftMotor.setSafetyEnabled(false);
-    m_leftMotor.setExpiration(.1);
-    m_leftMotor.feed();
-    m_rightMotor.setSafetyEnabled(true);
-    m_rightMotor.setSafetyEnabled(false);
-    m_rightMotor.setExpiration(.1);
-    m_rightMotor.feed();
   }
   
   public void arcadeDrive(double speed, double rotation) {
-    double speedModifier = 1;
-    double rotationModifier = 1;
+    double speedModifier = 0.85;
+    double rotationModifier = 0.8;
     drive.arcadeDrive(speed * speedModifier, rotation * rotationModifier); 
     
   }

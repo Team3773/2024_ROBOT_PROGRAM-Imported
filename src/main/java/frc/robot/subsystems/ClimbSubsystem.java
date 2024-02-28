@@ -13,7 +13,7 @@ public class ClimbSubsystem extends SubsystemBase {
   private CANSparkMax m_LiftMotor;
   private SparkPIDController m_pidController;
   private RelativeEncoder m_encoder;
-  private static final double speedModifier = .5;
+  private static final double speedModifier = 1;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
 
