@@ -33,12 +33,10 @@ public class ClimbCommand extends Command {
 
   private void runLift(ClimbSubsystem subsystem, boolean bumper, boolean trigger) {
     if (bumper) {
-      subsystem.runLift(climbSpeed);
+      subsystem.incrementArmPosition();
     } else if (trigger) {
-      subsystem.runLift(-climbSpeed);
-    } else {
-      subsystem.stopLift();
-    }
+      subsystem.decrementArmPosition();
+    } 
   }
 
   // Called once the command ends or is interrupted.
