@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class ClimbSubsystem extends SubsystemBase {
@@ -18,7 +19,7 @@ public class ClimbSubsystem extends SubsystemBase {
   private String smartDashboardPrefix = "";
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.01;
+  double armRotationStepValue = 0.1;
   double positionConverstionFactor = 0.00925;
   // com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new
   // WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax
@@ -91,18 +92,20 @@ public class ClimbSubsystem extends SubsystemBase {
     //   kMinOutput = min; kMaxOutput = max; 
     // }
 
-    m_pidController.setReference(currentRotationSetpoint, CANSparkMax.ControlType.kPosition);
+    
 
-    SmartDashboard.putNumber(smartDashboardPrefix + "Set Rotations", currentRotationSetpoint); 
-    SmartDashboard.putNumber(smartDashboardPrefix + "setPoint", currentRotationSetpoint);
+    SmartDashboard.putNumber(smartDashboardPrefix + "Set Rotations", currentRotationSetpoint);
+   // SmartDashboard.putNumber(smartDashboardPrefix + "setPoint", currentRotationSetpoint);
     SmartDashboard.putNumber(smartDashboardPrefix + "Encoder Position", m_encoder.getPosition());
   }
 
   public void incrementArmPosition(){
     currentRotationSetpoint += armRotationStepValue;
+    m_pidController.setReference(currentRotationSetpoint, CANSparkBase.ControlType.kPosition);
   }
   public void decrementArmPosition(){
     currentRotationSetpoint -= armRotationStepValue;
+    m_pidController.setReference(currentRotationSetpoint, CANSparkBase.ControlType.kPosition);
   }
 
   // public void runLift(double speed) {
