@@ -7,7 +7,6 @@ import frc.robot.subsystems.ClimbSubsystem;
 public class ClimbCommand extends Command {
   /* Creates a new Climb Command */
   ClimbSubsystem climbSubsystem;
-  private final double climbSpeed = 0.8;
   BooleanSupplier bumper, trigger;
   // BooleanSupplier leftTrigger;
 
@@ -33,11 +32,9 @@ public class ClimbCommand extends Command {
 
   private void runLift(ClimbSubsystem subsystem, boolean bumper, boolean trigger) {
     if (bumper) {
-      subsystem.runLift(climbSpeed);
+      subsystem.incrementArmPosition();
     } else if (trigger) {
-      subsystem.runLift(-climbSpeed);
-    } else {
-      subsystem.stopLift();
+      subsystem.decrementArmPosition();
     }
   }
 
