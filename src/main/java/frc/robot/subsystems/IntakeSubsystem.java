@@ -30,7 +30,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_armMotor = new CANSparkMax(RobotMap.m_armMotorPort, MotorType.kBrushless);
     m_armMotor.restoreFactoryDefaults();
     m_armMotor.setInverted(false);
-
+    m_armMotor.setSmartCurrentLimit(60);
     m_pidController = m_armMotor.getPIDController();
     // Encoder object created to display position values
     m_encoder = m_armMotor.getEncoder();   

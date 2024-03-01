@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
-
+import com.revrobotics.REVLibError;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkBase;
@@ -26,6 +26,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_LiftMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
     m_LiftMotor.restoreFactoryDefaults();
     m_LiftMotor.setInverted(invertMotor);
+    m_LiftMotor.setSmartCurrentLimit(60);
     this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_LiftMotor.getPIDController();
     // Encoder object created to display position values
