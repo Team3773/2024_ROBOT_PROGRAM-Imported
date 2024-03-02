@@ -42,8 +42,8 @@ public class DriveTrain extends SubsystemBase {
    * different method calls.
    */
 
-  private double kGearRatio = 1;;
-  private double kWheelDiameter = Units.inchesToMeters(6);;
+  private double kGearRatio = 1;
+  private double kWheelDiameter = Units.inchesToMeters(6);
   DifferentialDrive m_drivetrain;
 
   WPI_TalonSRX leftFront;
@@ -129,10 +129,10 @@ public class DriveTrain extends SubsystemBase {
      // set (ControlMode mode, double demand0, DemandType demand1Type, double demand1)
       leftFront.set(
           TalonSRXControlMode.Position,
-          m_feedforward.calculate(left.position));
+          m_feedforward.calculate(left.velocity));
       rightFront.set(
           TalonSRXControlMode.Position,
-          m_feedforward.calculate(right.position));
+          m_feedforward.calculate(right.velocity));
   }
 
   /**

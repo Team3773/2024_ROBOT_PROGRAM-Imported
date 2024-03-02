@@ -40,7 +40,7 @@ public class ClimbSubsystem extends SubsystemBase {
     // Brake is not needed with the PID Controller holding position
     // m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     // Add Default values
-    kP = 0.1;
+    kP = 0.25;
     kI = 1e-4;
     kD = 1;
     kIz = 0;
