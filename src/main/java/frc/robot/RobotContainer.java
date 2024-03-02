@@ -8,14 +8,17 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ClimbCommand;
 // import frc.robot.commands.RightClimbCommand;
 import frc.robot.commands.NoteIntakeCommand;
 import frc.robot.commands.TeleopDrive;
+import frc.robot.commands.autonomous.DriveForward;
 import frc.robot.subsystems.ClimbSubsystem;
 // import frc.robot.subsystems.RightClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.IntakeSubsystem;
 
 /** Add your docs here. */
@@ -25,13 +28,18 @@ public class RobotContainer {
                 return () -> doubleSupplier.getAsDouble() > 0;
         }
 
+        public double kMaxSpeedMetersPerSecond = 1;
+        public double kMaxAccelerationMetersPerSecondSquared = 1;
+
         // This is where robot subsystems are initialized.
-        public final DriveSubsystem m_drive = new DriveSubsystem();
+        // public final DriveSubsystem m_drive = new DriveSubsystem();
         public final IntakeSubsystem m_arm = new IntakeSubsystem();
         public final ClimbSubsystem m_LeftClimbSubsystem = new ClimbSubsystem(RobotMap.m_leftLiftMotorPort, false,
                         "Left Lift ");
         public final ClimbSubsystem m_RightClimbSubsystem = new ClimbSubsystem(RobotMap.m_rightLiftMotorPort, true,
                         "Right Lift ");
+
+        public static DriveTrain driveTrain = new DriveTrain();
 
         // public final RightClimbSubsystem m_rightclimb = new RightClimbSubsystem();
 
@@ -44,8 +52,8 @@ public class RobotContainer {
                 // Set Default Command for the drivetrain subsystem. This will be active during
                 // teleop mode.
                 System.out.println("Creating Commands");
-                m_drive.setDefaultCommand(new TeleopDrive(
-                                m_drive,
+                driveTrain.setDefaultCommand(new TeleopDrive(
+                                driveTrain,
                                 () -> controller.getLeftX(),
                                 () -> controller.getLeftY()));
 
@@ -65,8 +73,5 @@ public class RobotContainer {
                                 () -> controller2.getRightBumper(),
                                 getBooleanSupplier(() -> controller2.getRightTriggerAxis())));
         }
-
-        public Command getAutonomousCommand() {
-                return null;
-        }
+        
 }

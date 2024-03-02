@@ -31,13 +31,12 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightMotorFollower = new WPI_TalonSRX(RobotMap.m_rightMotorFollowerPort);
     m_leftMotorFollower.follow(m_leftMotor);
     m_rightMotorFollower.follow(m_rightMotor);
-    drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    drive = new DifferentialDrive(m_leftMotor, m_rightMotor);    
   }
   
   public void arcadeDrive(double speed, double rotation) {
     double speedModifier = 0.85;
     double rotationModifier = 0.8;
-    drive.arcadeDrive(speed * speedModifier, rotation * rotationModifier); 
-    
+    drive.arcadeDrive(speed * speedModifier, rotation * rotationModifier);     
   }
 }
