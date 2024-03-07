@@ -14,7 +14,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   //private static final double kMaxSpeed = 3.0; // meters per second
   //private static final double kMaxAngularSpeed = 2 * Math.PI; // one rotation
-  private WPI_TalonSRX m_leftMotor;
+  public WPI_TalonSRX m_leftMotor;
   private WPI_TalonSRX m_rightMotor;
   private WPI_TalonSRX m_leftMotorFollower;
   private WPI_TalonSRX m_rightMotorFollower;

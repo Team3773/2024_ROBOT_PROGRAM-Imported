@@ -18,7 +18,7 @@ public class ClimbSubsystem extends SubsystemBase {
   private String smartDashboardPrefix = "";
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.01;
+  double armRotationStepValue = 0.01; //0.01
   // com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new
   // WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax
   // for neo 1.1 motor
@@ -38,8 +38,8 @@ public class ClimbSubsystem extends SubsystemBase {
     // Brake is not needed with the PID Controller holding position
     //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     //Add Default values
-    kP = 0.1; 
-    kI = 1e-4;
+    kP = .1; 
+    kI = 1e-4; 
     kD = 1; 
     kIz = 0; 
     kFF = 0; 
@@ -105,6 +105,7 @@ public class ClimbSubsystem extends SubsystemBase {
   public void runLift(double speed) {
     System.out.println(smartDashboardPrefix + "Lift speed:" + speed * speedModifier);    
     m_LiftMotor.set(speed * speedModifier);
+    System.out.println("'m_liftMotor' applied output: " + m_LiftMotor.getAppliedOutput()/1.00); //Testing purposes only. Remove 
   }
 
   public void stopLift() {

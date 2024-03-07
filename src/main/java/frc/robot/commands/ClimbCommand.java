@@ -7,7 +7,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 public class ClimbCommand extends Command {
   /* Creates a new Climb Command */
   ClimbSubsystem climbSubsystem;
-  private final double climbSpeed = 0.8;
+  private final double climbSpeed = 0.7;
   BooleanSupplier bumper, trigger;
   // BooleanSupplier leftTrigger;
 
