@@ -20,6 +20,8 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.NoteLockSubsystem;
+import frc.robot.commands.NoteLockCommand;
 
 /** Add your docs here. */
 public class RobotContainer {
@@ -38,6 +40,7 @@ public class RobotContainer {
                         "Left Lift ");
         public final ClimbSubsystem m_RightClimbSubsystem = new ClimbSubsystem(RobotMap.m_rightLiftMotorPort, true,
                         "Right Lift ");
+        public final NoteLockSubsystem m_lock = new NoteLockSubsystem();
 
         public static DriveTrain driveTrain = new DriveTrain();
 
@@ -72,6 +75,14 @@ public class RobotContainer {
                                 m_RightClimbSubsystem,
                                 () -> controller2.getRightBumper(),
                                 getBooleanSupplier(() -> controller2.getRightTriggerAxis())));
+                
+                m_lock.setDefaultCommand(new NoteLockCommand(
+                                m_lock,
+                                () -> controller2.getXButton(),
+                                () -> controller2.getYButton()));
+        }      
+
+        public Command getAutonomousCommand() {
+                return null;
         }
-        
 }

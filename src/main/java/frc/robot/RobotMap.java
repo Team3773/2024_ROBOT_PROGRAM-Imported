@@ -8,6 +8,7 @@ public class RobotMap {
     public final static int m_armMotorPort = 4;
     public final static int m_leftLiftMotorPort = 6;
     public final static int m_rightLiftMotorPort = 7;
+    public final static int m_lockMotorPort = 5;
 //XboxController port works differently due to this number being able to change, meaning it needs to be public
 }
 
