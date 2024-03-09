@@ -18,22 +18,23 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 public class NoteLockSubsystem extends SubsystemBase {
 
   private CANSparkMax m_lockMotor;
-  private static final double speedModifier = 1.0;
-  private SparkPIDController m_pidController;
+  private static final double speedModifier = 0.5;
+  /*private SparkPIDController m_pidController;
   private AbsoluteEncoder m_encoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
 
   double currentRotationSetpoint = 0;
   double armRotationStepValue = 0.5;
-  double positionConverstionFactor = 0.00925;
+  double positionConverstionFactor = 0.00925;*/
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
     m_lockMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
     m_lockMotor.restoreFactoryDefaults();
     m_lockMotor.setInverted(invertMotor);
-    m_lockMotor.setSmartCurrentLimit(60);
-    this.smartDashboardPrefix = smartDashboardPrefix;
+    m_lockMotor.setSmartCurrentLimit(5);
+  }
+    /*this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_lockMotor.getPIDController();
     // Encoder object created to display position values
     m_encoder = m_lockMotor.getAbsoluteEncoder(com.revrobotics.SparkAbsoluteEncoder.Type.kDutyCycle);
@@ -110,19 +111,20 @@ public class NoteLockSubsystem extends SubsystemBase {
 
   public void decrementArmPosition() {
     currentRotationSetpoint -= armRotationStepValue;
-  }
+  }*/
+
   public NoteLockSubsystem() {
     m_lockMotor = new CANSparkMax (RobotMap.m_lockMotorPort,MotorType.kBrushed);
   }
 
   public void runLift(double speed) {
-    System.out.println("Intake speed:" + speed * speedModifier);    
+    System.out.println("Lock speed:" + speed * speedModifier);    
     m_lockMotor.set(speed * speedModifier);
   }
 
   public void stopLift() {
     var speed = 0;
-    System.out.println("Intake speed:" + speed);
+    System.out.println("Lock speed:" + speed);
     m_lockMotor.set(speed);
   }
 }
