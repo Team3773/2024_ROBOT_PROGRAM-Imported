@@ -4,9 +4,19 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase; // May not need 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.RobotContainer;
+import frc.robot.RobotMap;
+
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,7 +27,19 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Autos extends TimedRobot {
   private Command m_autonomousCommand;
 
+  private WPI_TalonSRX m_leftMotor;
+  private WPI_TalonSRX m_rightMotor;
+  private WPI_TalonSRX m_leftMotorFollower;
+  private WPI_TalonSRX m_rightMotorFollower;
+
   private RobotContainer m_robotContainer;
+  private double autoSpeed = 1.0; 
+  private double autoSpeedModifier = 1.0; 
+  private double autoRotation = .8; 
+
+  Timer timer = new Timer();
+
+    
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -28,6 +50,13 @@ public class Autos extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    m_leftMotor = new WPI_TalonSRX(RobotMap.m_leftMotorPort);
+    m_rightMotor = new WPI_TalonSRX(RobotMap.m_rightMotorPort);
+    m_leftMotorFollower = new WPI_TalonSRX(RobotMap.m_leftMotorFollowerPort);
+    m_rightMotorFollower = new WPI_TalonSRX(RobotMap.m_rightMotorFollowerPort);
+    m_leftMotorFollower.follow(m_leftMotor);
+    m_rightMotorFollower.follow(m_rightMotor);
   }
 
   /**
@@ -60,6 +89,9 @@ public class Autos extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
+      
+  
+
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -68,7 +100,17 @@ public class Autos extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {    
+  public void autonomousPeriodic() {   
+   
+    if (timer.get() < 2)
+    {
+      drivesubsystem.m_leftMotor.set(1);
+    }
+    else 
+    {
+      drivesubsystem.arcadeDrive(0, 0); // End with 0 speed and 0 rotation 
+    }
+    
   }
 
   @Override
@@ -108,3 +150,4 @@ public class Autos extends TimedRobot {
   public void simulationPeriodic() {
   }
 }
+
