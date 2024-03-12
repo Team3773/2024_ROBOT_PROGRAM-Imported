@@ -30,9 +30,9 @@ public class NoteLockCommand extends Command {
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
     if(xButton.getAsBoolean()){
-      NoteLockSubsystem.runLift(lockSpeed);
+      NoteLockSubsystem.incrementArmPosition();
     }else if(yButton.getAsBoolean()){
-      NoteLockSubsystem.runLift(-lockSpeed);
+      NoteLockSubsystem.decrementArmPosition();
     }else{
       NoteLockSubsystem.stopLift();
     }

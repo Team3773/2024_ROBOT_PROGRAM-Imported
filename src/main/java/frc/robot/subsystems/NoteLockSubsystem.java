@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -18,22 +20,39 @@ public class NoteLockSubsystem extends SubsystemBase {
 
   private CANSparkMax m_lockMotor;
   private static final double speedModifier = 0.5;
-  private Encoder m_encoder;
+  private RelativeEncoder m_encoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
-  /*private SparkPIDController m_pidController;
-  
+  private SparkPIDController m_pidController;
+  private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
 
   double currentRotationSetpoint = 0;
   double armRotationStepValue = 0.5;
-  double positionConverstionFactor = 0.00925;*/
+  double positionConverstionFactor = 0.00925;
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
-    m_lockMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
+    m_lockMotor = new CANSparkMax(motorPort, MotorType.kBrushed);
     m_lockMotor.restoreFactoryDefaults();
     m_lockMotor.setInverted(invertMotor);
     m_lockMotor.setSmartCurrentLimit(5);
-    m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    //m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    m_pidController = m_lockMotor.getPIDController();
+    m_encoder = m_lockMotor.getAlternateEncoder(kAltEncType,177);
+
+    kP = 0.1;
+    kI = 1e-4;
+    kD = 1;
+    kIz = 0;
+    kFF = 0;
+    kMaxOutput = 1;
+    kMinOutput = -1;
+
+    m_pidController.setP(kP);
+    m_pidController.setI(kI);
+    m_pidController.setD(kD);
+    m_pidController.setIZone(kIz);
+    m_pidController.setFF(kFF);
+    m_pidController.setOutputRange(kMinOutput, kMaxOutput);
   }
     /*this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_lockMotor.getPIDController();
@@ -48,13 +67,7 @@ public class NoteLockSubsystem extends SubsystemBase {
     // Brake is not needed with the PID Controller holding position
     //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     // Add Default values
-    kP = 0.1;
-    kI = 1e-4;
-    kD = 1;
-    kIz = 0;
-    kFF = 0;
-    kMaxOutput = 1;
-    kMinOutput = -1;
+
     m_pidController.setP(kP);
     m_pidController.setI(kI);
     m_pidController.setD(kD);
@@ -104,19 +117,16 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_pidController.setReference(currentRotationSetpoint, CANSparkBase.ControlType.kPosition);
     SmartDashboard.putNumber(smartDashboardPrefix + "Set Rotations", currentRotationSetpoint);
     SmartDashboard.putNumber(smartDashboardPrefix + "Encoder Position", m_encoder.getPosition());
-  }
-
+  }*/
   public void incrementArmPosition() {
     currentRotationSetpoint += armRotationStepValue;
   }
 
   public void decrementArmPosition() {
     currentRotationSetpoint -= armRotationStepValue;
-  }*/
-
-  public NoteLockSubsystem() {
-    m_lockMotor = new CANSparkMax (RobotMap.m_lockMotorPort,MotorType.kBrushed);
   }
+
+ 
 
   public void runLift(double speed) {
     System.out.println("Lock speed:" + speed * speedModifier);    

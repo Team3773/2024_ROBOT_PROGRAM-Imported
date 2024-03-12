@@ -34,7 +34,7 @@ public class RobotContainer {
                         "Left Lift ");
         public final ClimbSubsystem m_RightClimbSubsystem = new ClimbSubsystem(RobotMap.m_rightLiftMotorPort, true,
                         "Right Lift ");
-        public final NoteLockSubsystem m_lock = new NoteLockSubsystem();
+        public final NoteLockSubsystem m_lock = new NoteLockSubsystem(RobotMap.m_lockMotorPort, false, "Lock Motor ");
 
         // public final RightClimbSubsystem m_rightclimb = new RightClimbSubsystem();
 
