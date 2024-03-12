@@ -26,7 +26,11 @@ public class NoteLockSubsystem extends SubsystemBase {
   private static final SparkRelativeEncoder.Type kAltEncType = SparkRelativeEncoder.Type.kHallSensor;
 
   double currentRotationSetpoint = 0;
+<<<<<<< HEAD
   double armRotationStepValue = 0.0001;
+=======
+  double armRotationStepValue = 0.01;
+>>>>>>> 826455cb9aad6fafcc80fb0e42ce8ba2b2b6d2c5
   double positionConverstionFactor = 0.00925;
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
@@ -35,8 +39,13 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_lockMotor.setInverted(invertMotor);
     m_lockMotor.setSmartCurrentLimit(5);
     // m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+<<<<<<< HEAD
     m_pidController = m_lockMotor.getPIDController();
     m_encoder = m_lockMotor.getEncoder(kAltEncType, 177);
+=======
+    m_pidController = m_lockMotor.getPIDController();    
+    m_encoder = m_lockMotor.getAlternateEncoder(kAltEncType, 177);
+>>>>>>> 826455cb9aad6fafcc80fb0e42ce8ba2b2b6d2c5
     m_pidController.setFeedbackDevice(m_encoder);
 
     kP = 0.1;
