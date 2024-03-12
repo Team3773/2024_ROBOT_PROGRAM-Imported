@@ -35,9 +35,9 @@ public class IntakeSubsystem extends SubsystemBase {
     // Encoder object created to display position values
     m_encoder = m_armMotor.getEncoder();   
     //Might be required to initialize the encoder if it is in a known location on startup.
-    m_encoder.setPosition(-15.02);
+    m_encoder.setPosition(0);
     // Brake is not needed with the PID Controller holding position
-    m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     //Add Default values
     kP = 0.1; 
     kI = 1e-4;
@@ -52,8 +52,8 @@ public class IntakeSubsystem extends SubsystemBase {
     m_pidController.setIZone(kIz);
     m_pidController.setFF(kFF);
     m_pidController.setOutputRange(kMinOutput, kMaxOutput);
-    double currentRotationSetpoint = -15.02; // Example target position (encoder counts or units)
-    m_pidController.setReference(currentRotationSetpoint, ControlType.kPosition);
+    //double currentRotationSetpoint = -15.02; // Example target position (encoder counts or units)
+    //m_pidController.setReference(currentRotationSetpoint, ControlType.kPosition);
   }
 
   public void initDashboard(){

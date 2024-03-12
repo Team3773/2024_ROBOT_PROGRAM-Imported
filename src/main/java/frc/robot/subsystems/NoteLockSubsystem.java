@@ -27,7 +27,7 @@ public class NoteLockSubsystem extends SubsystemBase {
 
   double currentRotationSetpoint = 0;
   double armRotationStepValue = 0.01;
-  double positionConverstionFactor = 0.00925;
+  //double positionConverstionFactor = 0.00925;
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
     m_lockMotor = new CANSparkMax(motorPort, MotorType.kBrushed);
@@ -37,10 +37,7 @@ public class NoteLockSubsystem extends SubsystemBase {
     // m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_pidController = m_lockMotor.getPIDController();    
     m_encoder = m_lockMotor.getAlternateEncoder(kAltEncType, 177);
-    m_pidController.setFeedbackDevice(m_encoder);
-
-    kP = 0.1;
-    kI = 1e-4;
+    m_encoder.setPosition(0); 
     kD = 1;
     kIz = 0;
     kFF = 0;
