@@ -7,10 +7,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
-
+import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
-import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -19,10 +18,11 @@ public class NoteLockSubsystem extends SubsystemBase {
 
   private CANSparkMax m_lockMotor;
   private static final double speedModifier = 0.5;
-  /*private SparkPIDController m_pidController;
-  private AbsoluteEncoder m_encoder;
+  private Encoder m_encoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
+  /*private SparkPIDController m_pidController;
+  
 
   double currentRotationSetpoint = 0;
   double armRotationStepValue = 0.5;
@@ -33,6 +33,7 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_lockMotor.restoreFactoryDefaults();
     m_lockMotor.setInverted(invertMotor);
     m_lockMotor.setSmartCurrentLimit(5);
+    m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
     /*this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_lockMotor.getPIDController();
@@ -45,7 +46,7 @@ public class NoteLockSubsystem extends SubsystemBase {
     // startup.
 
     // Brake is not needed with the PID Controller holding position
-    // m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     // Add Default values
     kP = 0.1;
     kI = 1e-4;

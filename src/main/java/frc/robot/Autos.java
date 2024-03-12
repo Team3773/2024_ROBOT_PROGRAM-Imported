@@ -104,11 +104,11 @@ public class Autos extends TimedRobot {
    
     if (timer.get() < 2)
     {
-      drivesubsystem.m_leftMotor.set(1);
+      //drivesubsystem.m_leftMotor.set(1);
     }
     else 
     {
-      drivesubsystem.arcadeDrive(0, 0); // End with 0 speed and 0 rotation 
+      //drivesubsystem.arcadeDrive(0, 0); // End with 0 speed and 0 rotation 
     }
     
   }
