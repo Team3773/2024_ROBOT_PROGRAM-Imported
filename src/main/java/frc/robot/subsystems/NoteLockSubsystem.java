@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
+import com.revrobotics.SparkRelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -23,10 +23,10 @@ public class NoteLockSubsystem extends SubsystemBase {
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
   private SparkPIDController m_pidController;
-  private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
+  private static final SparkRelativeEncoder.Type kAltEncType = SparkRelativeEncoder.Type.kHallSensor;
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.5;
+  double armRotationStepValue = 0.0001;
   double positionConverstionFactor = 0.00925;
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
@@ -36,7 +36,8 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_lockMotor.setSmartCurrentLimit(5);
     // m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_pidController = m_lockMotor.getPIDController();
-    m_encoder = m_lockMotor.getAlternateEncoder(kAltEncType, 177);
+    m_encoder = m_lockMotor.getEncoder(kAltEncType, 177);
+    m_pidController.setFeedbackDevice(m_encoder);
 
     kP = 0.1;
     kI = 1e-4;
