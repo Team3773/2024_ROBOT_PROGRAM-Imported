@@ -34,7 +34,7 @@ public class NoteLockCommand extends Command {
     }else if(yButton.getAsBoolean()){
       NoteLockSubsystem.decrementArmPosition();
     }else{
-      NoteLockSubsystem.stopLift();
+      
     }
   }
 
