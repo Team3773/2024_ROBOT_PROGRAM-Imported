@@ -7,6 +7,7 @@ import frc.robot.RobotMap;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.SparkRelativeEncoder;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -33,7 +34,8 @@ public class IntakeSubsystem extends SubsystemBase {
     m_armMotor.setSmartCurrentLimit(60);
     m_pidController = m_armMotor.getPIDController();
     // Encoder object created to display position values
-    m_encoder = m_armMotor.getEncoder();   
+    m_encoder = m_armMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);  
+    m_pidController.setFeedbackDevice(m_encoder); 
     //Might be required to initialize the encoder if it is in a known location on startup.
     m_encoder.setPosition(0);
     // Brake is not needed with the PID Controller holding position
@@ -98,17 +100,17 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Note Arm Encoder Position", m_encoder.getPosition());
   }
 
-  public void incrementArmPosition(){
+  public void incrementPosition(){
     currentRotationSetpoint += armRotationStepValue;
   }
-  public void decrementArmPosition(){
+  public void decrementPosition(){
     currentRotationSetpoint -= armRotationStepValue;
   }
 
-  public void runLift(double speed) {
-    System.out.println("Intake speed:" + speed * speedModifier);    
-    m_armMotor.set(speed * speedModifier);
-  }
+  // public void runLift(double speed) {
+  //   System.out.println("Intake speed:" + speed * speedModifier);    
+  //   m_armMotor.set(speed * speedModifier);
+  // }
 
   public void stopLift() {
     var speed = 0;

@@ -31,9 +31,9 @@ public class NoteIntakeCommand extends Command {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
     if(bButton.getAsBoolean()){
       //intakeSubsystem.(intakeSpeed);
-      intakeSubsystem.incrementArmPosition();
+      intakeSubsystem.incrementPosition();
     }else if(aButton.getAsBoolean()){
-      intakeSubsystem.decrementArmPosition();
+      intakeSubsystem.decrementPosition();
       //intakeSubsystem.runLift(-intakeSpeed);
     }else{
       //intakeSubsystem.stopLift();

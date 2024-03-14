@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.SparkRelativeEncoder;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -13,7 +15,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
   private CANSparkMax m_LiftMotor;
   private SparkPIDController m_pidController;
-  private AbsoluteEncoder m_encoder;
+  private RelativeEncoder m_encoder;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   private String smartDashboardPrefix = "";
 
@@ -29,7 +31,8 @@ public class ClimbSubsystem extends SubsystemBase {
     this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_LiftMotor.getPIDController();
     // Encoder object created to display position values
-    m_encoder = m_LiftMotor.getAbsoluteEncoder(com.revrobotics.SparkAbsoluteEncoder.Type.kDutyCycle);
+    m_encoder = m_LiftMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);
+    m_pidController.setFeedbackDevice(m_encoder);
     currentRotationSetpoint = 0;
 
     // m_encoder.setPositionConversionFactor(positionConverstionFactor);
