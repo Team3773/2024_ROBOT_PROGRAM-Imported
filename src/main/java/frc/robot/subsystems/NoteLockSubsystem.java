@@ -25,10 +25,10 @@ public class NoteLockSubsystem extends SubsystemBase {
   private SparkPIDController m_pidController;
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.01;
-  //double positionConverstionFactor = 0.00925;
+  double armRotationStepValue = 0.1;
 
   public NoteLockSubsystem(int motorPort, boolean invertMotor, String smartDashboardPrefix) {
+    this.smartDashboardPrefix = smartDashboardPrefix;
     m_lockMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
     m_lockMotor.restoreFactoryDefaults();
     m_lockMotor.setInverted(invertMotor);
@@ -36,57 +36,36 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_lockMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_pidController = m_lockMotor.getPIDController();    
     m_encoder = m_lockMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);
+    // m_encoder.setPosition(0);
     m_pidController.setFeedbackDevice(m_encoder);
-  }
-    /*kP = 0.1;
+    kP = 0.1;
     kI = 1e-4;
     kD = 1;
     kIz = 0;
     kFF = 0;
     kMaxOutput = 1;
     kMinOutput = -1;
-
     m_pidController.setP(kP);
     m_pidController.setI(kI);
     m_pidController.setD(kD);
     m_pidController.setIZone(kIz);
     m_pidController.setFF(kFF);
     m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+  }
+
   
 
-   
-    this.smartDashboardPrefix = smartDashboardPrefix;
-    m_pidController = m_lockMotor.getPIDController();
-    // Encoder object created to display position values
-    m_encoder = m_lockMotor.getAbsoluteEncoder(com.revrobotics.SparkAbsoluteEncoder.Type.kDutyCycle);
-    currentRotationSetpoint = 0;
     
-    // m_encoder.setPositionConversionFactor(positionConverstionFactor);
-    // Might be required to initialize the encoder if it is in a known location on startup.
-    
-    // Brake is not needed with the PID Controller holding position
-    //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    // Add Default values
-    
-    m_pidController.setP(kP);
-    m_pidController.setI(kI);
-    m_pidController.setD(kD);
-    m_pidController.setIZone(kIz);
-    m_pidController.setFF(kFF);
-    m_pidController.setOutputRange(kMinOutput, kMaxOutput);
-    // initDashboard();
-    }
-    
-    public void initDashboard() {
-    SmartDashboard.putNumber(smartDashboardPrefix + "P Gain", kP);
-    SmartDashboard.putNumber(smartDashboardPrefix + "I Gain", kI);
-    SmartDashboard.putNumber(smartDashboardPrefix + "D Gain", kD);
-    SmartDashboard.putNumber(smartDashboardPrefix + "I Zone", kIz);
-    SmartDashboard.putNumber(smartDashboardPrefix + "Feed Forward", kFF);
-    SmartDashboard.putNumber(smartDashboardPrefix + "Max Output", kMaxOutput);
-    SmartDashboard.putNumber(smartDashboardPrefix + "Min Output", kMinOutput);
-    }
-    public void periodic() {
+    // public void initDashboard() {
+    // SmartDashboard.putNumber(smartDashboardPrefix + "P Gain", kP);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "I Gain", kI);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "D Gain", kD);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "I Zone", kIz);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "Feed Forward", kFF);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "Max Output", kMaxOutput);
+    // SmartDashboard.putNumber(smartDashboardPrefix + "Min Output", kMinOutput);
+    // }
+    // public void periodic() {
     // This method will be called once per scheduler run
     
     // read PID coefficients from SmartDashboard

@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.01;
+  double armRotationStepValue = 0.1;
 
   // com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new
   // WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax
@@ -37,7 +37,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_encoder = m_armMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);  
     m_pidController.setFeedbackDevice(m_encoder); 
     //Might be required to initialize the encoder if it is in a known location on startup.
-    m_encoder.setPosition(0);
+    // m_encoder.setPosition(0);
     // Brake is not needed with the PID Controller holding position
     //m_armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     //Add Default values
@@ -59,14 +59,14 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void initDashboard(){
-    SmartDashboard.putNumber("P Gain", kP);
-    SmartDashboard.putNumber("I Gain", kI);
-    SmartDashboard.putNumber("D Gain", kD);
-    SmartDashboard.putNumber("I Zone", kIz);
-    SmartDashboard.putNumber("Feed Forward", kFF);
-    SmartDashboard.putNumber("Max Output", kMaxOutput);
-    SmartDashboard.putNumber("Min Output", kMinOutput);
-    SmartDashboard.putNumber("Set Rotations", currentRotationSetpoint);
+    // SmartDashboard.putNumber("P Gain", kP);
+    // SmartDashboard.putNumber("I Gain", kI);
+    // SmartDashboard.putNumber("D Gain", kD);
+    // SmartDashboard.putNumber("I Zone", kIz);
+    // SmartDashboard.putNumber("Feed Forward", kFF);
+    // SmartDashboard.putNumber("Max Output", kMaxOutput);
+    // SmartDashboard.putNumber("Min Output", kMinOutput);
+    // SmartDashboard.putNumber("Set Rotations", currentRotationSetpoint);
   }
 
   @Override
@@ -74,25 +74,25 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     // read PID coefficients from SmartDashboard
-    double p = SmartDashboard.getNumber("P Gain", 0);
-    double i = SmartDashboard.getNumber("I Gain", 0);
-    double d = SmartDashboard.getNumber("D Gain", 0);
-    double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Feed Forward", 0);
-    double max = SmartDashboard.getNumber("Max Output", 0);
-    double min = SmartDashboard.getNumber("Min Output", 0);
-    currentRotationSetpoint = SmartDashboard.getNumber("Set Rotations", 0);
+    // double p = SmartDashboard.getNumber("P Gain", 0);
+    // double i = SmartDashboard.getNumber("I Gain", 0);
+    // double d = SmartDashboard.getNumber("D Gain", 0);
+    // double iz = SmartDashboard.getNumber("I Zone", 0);
+    // double ff = SmartDashboard.getNumber("Feed Forward", 0);
+    // double max = SmartDashboard.getNumber("Max Output", 0);
+    // double min = SmartDashboard.getNumber("Min Output", 0);
+    // currentRotationSetpoint = SmartDashboard.getNumber("Set Rotations", 0);
 
-    // if PID coefficients on SmartDashboard have changed, write new values to controller
-    if((p != kP)) { m_pidController.setP(p); kP = p; }
-    if((i != kI)) { m_pidController.setI(i); kI = i; }
-    if((d != kD)) { m_pidController.setD(d); kD = d; }
-    if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-    if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
-    if((max != kMaxOutput) || (min != kMinOutput)) { 
-      m_pidController.setOutputRange(min, max); 
-      kMinOutput = min; kMaxOutput = max; 
-    }
+    // // if PID coefficients on SmartDashboard have changed, write new values to controller
+    // if((p != kP)) { m_pidController.setP(p); kP = p; }
+    // if((i != kI)) { m_pidController.setI(i); kI = i; }
+    // if((d != kD)) { m_pidController.setD(d); kD = d; }
+    // if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
+    // if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
+    // if((max != kMaxOutput) || (min != kMinOutput)) { 
+    //   m_pidController.setOutputRange(min, max); 
+    //   kMinOutput = min; kMaxOutput = max; 
+    // }
     m_pidController.setReference(currentRotationSetpoint, CANSparkMax.ControlType.kPosition);
     
     
