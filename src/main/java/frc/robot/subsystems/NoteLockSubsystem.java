@@ -109,6 +109,10 @@ public class NoteLockSubsystem extends SubsystemBase {
     currentRotationSetpoint -= armRotationStepValue;
   }
 
+  public void goToPosition(double value){
+    currentRotationSetpoint = value;
+  }
+
   // public void runLift(double speed) {
   //   System.out.println("Lock speed:" + speed * speedModifier);
   //   m_lockMotor.set(speed * speedModifier);
