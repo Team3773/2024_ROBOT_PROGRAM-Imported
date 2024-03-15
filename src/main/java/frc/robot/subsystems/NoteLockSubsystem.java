@@ -39,7 +39,7 @@ public class NoteLockSubsystem extends SubsystemBase {
     // m_encoder.setPosition(0);
     m_pidController.setFeedbackDevice(m_encoder);
     kP = 0.1;
-    kI = 1e-4;
+    kI = 1e-5;
     kD = 1;
     kIz = 0;
     kFF = 0;
