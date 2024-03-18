@@ -12,6 +12,8 @@ public class NoteIntakeCommand extends Command {
   private final double intakeSpeed = 0.45;
   BooleanSupplier aButton;
   BooleanSupplier bButton;
+  private final double defaultPosition = 0;
+  private final double otherPosition = .05;
 
   public NoteIntakeCommand(IntakeSubsystem intakeSubsystem, BooleanSupplier aButton, BooleanSupplier bButton) {
     this.intakeSubsystem = intakeSubsystem;
@@ -29,14 +31,10 @@ public class NoteIntakeCommand extends Command {
   @Override
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
-    if(bButton.getAsBoolean()){
-      //intakeSubsystem.(intakeSpeed);
-      intakeSubsystem.incrementPosition();
+    if(bButton.getAsBoolean()){      
+      intakeSubsystem.goToPosition(defaultPosition);
     }else if(aButton.getAsBoolean()){
-      intakeSubsystem.decrementPosition();
-      //intakeSubsystem.runLift(-intakeSpeed);
-    }else{
-      //intakeSubsystem.stopLift();
+      intakeSubsystem.goToPosition(otherPosition);      
     }
   }
 
