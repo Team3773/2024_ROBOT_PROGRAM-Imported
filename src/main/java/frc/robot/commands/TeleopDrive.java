@@ -6,17 +6,17 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveTrain;
 
 public class TeleopDrive extends Command {
   /** Creates a new TeleopDrive. */
-  DriveSubsystem m_DriveSubsystem;
+  DriveTrain m_DriveSubsystem;
   DoubleSupplier xAxis;
   DoubleSupplier yAxis;
   DoubleSupplier throttleSupplier;
   double throttle;
 
-  public TeleopDrive(DriveSubsystem driveSubsystem, DoubleSupplier xAxis, DoubleSupplier yAxis) {
+  public TeleopDrive(DriveTrain driveSubsystem, DoubleSupplier xAxis, DoubleSupplier yAxis) {
     this.m_DriveSubsystem = driveSubsystem;
     this.xAxis = xAxis;
     this.yAxis = yAxis;

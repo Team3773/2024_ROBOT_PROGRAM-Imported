@@ -17,4 +17,10 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kDriverControllerPort2 = 1;
   }
+  public static double kMaxSpeedMetersPerSecond = 1;
+  public static double kMaxAccelerationMetersPerSecondSquared = 1;
+  public static final String driveStraighttenthm = "Drive Straight .1m";
+  public static final String driveStraighthalfm = "Drive Straight .5m";
+  public static final String driveStraight1m = "Drive Straight 1m";
+  public static final String driveForaward1Sec = "Drive Forward 1 Second";
 }
