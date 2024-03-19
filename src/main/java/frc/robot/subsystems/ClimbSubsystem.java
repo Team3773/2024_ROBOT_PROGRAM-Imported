@@ -27,7 +27,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_LiftMotor = new CANSparkMax(motorPort, MotorType.kBrushless);
     m_LiftMotor.restoreFactoryDefaults();
     m_LiftMotor.setInverted(invertMotor);
-    m_LiftMotor.setSmartCurrentLimit(60);
+    m_LiftMotor.setSmartCurrentLimit(40);
     this.smartDashboardPrefix = smartDashboardPrefix;
     m_pidController = m_LiftMotor.getPIDController();
     // Encoder object created to display position values

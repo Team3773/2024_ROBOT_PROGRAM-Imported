@@ -29,7 +29,7 @@ public class NoteLockCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
+    //Run the Lock motor when X/Y are pushed. If neither button is pressed then stop the motors.
     if(xButton.getAsBoolean()){
       NoteLockSubsystem.goToPosition(lockedPosition);
     }else if(yButton.getAsBoolean()){

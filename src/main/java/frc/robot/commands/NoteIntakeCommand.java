@@ -8,8 +8,8 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class NoteIntakeCommand extends Command {
   /** Creates a new NoteIntakeCommand. */
   
- IntakeSubsystem intakeSubsystem;
-  private final double intakeSpeed = 0.45;
+  IntakeSubsystem intakeSubsystem;
+  private final double intakeSpeed = 1.0;
   BooleanSupplier aButton;
   BooleanSupplier bButton;
 

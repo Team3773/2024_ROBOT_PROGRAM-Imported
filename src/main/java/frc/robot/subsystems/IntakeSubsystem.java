@@ -17,11 +17,11 @@ public class IntakeSubsystem extends SubsystemBase {
   private CANSparkMax m_armMotor;
   private SparkPIDController m_pidController;
   private RelativeEncoder m_encoder;
-  private static final double speedModifier = 0.7;
+  private static final double speedModifier = 1.0;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
   double currentRotationSetpoint = 0;
-  double armRotationStepValue = 0.1;
+  double armRotationStepValue = 0.6;
 
   // com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX m_armMotor = new
   // WPI_TalonSRX(RobotMap.m_armMotorPort); change motor contgroller to SparkMax
@@ -31,7 +31,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_armMotor = new CANSparkMax(RobotMap.m_armMotorPort, MotorType.kBrushless);
     m_armMotor.restoreFactoryDefaults();
     m_armMotor.setInverted(false);
-    m_armMotor.setSmartCurrentLimit(60);
+    m_armMotor.setSmartCurrentLimit(40);
     m_pidController = m_armMotor.getPIDController();
     // Encoder object created to display position values
     m_encoder = m_armMotor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);  
@@ -107,15 +107,14 @@ public class IntakeSubsystem extends SubsystemBase {
     currentRotationSetpoint -= armRotationStepValue;
   }
 
-  // public void runLift(double speed) {
-  //   System.out.println("Intake speed:" + speed * speedModifier);    
-  //   m_armMotor.set(speed * speedModifier);
-  // }
+  /*public void runLift(double speed) {
+    System.out.println("Intake speed:" + speed * speedModifier);    
+    m_armMotor.set(speed * speedModifier);
+   }*/
 
   public void stopLift() {
     var speed = 0;
     System.out.println("Intake speed:" + speed);
     m_armMotor.set(speed);
   }
-
 }

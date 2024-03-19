@@ -8,7 +8,8 @@ public class ClimbCommand extends Command {
   /* Creates a new Climb Command */
   ClimbSubsystem climbSubsystem;
   BooleanSupplier bumper, trigger;
-  // BooleanSupplier leftTrigger;
+  private final double upPosition = -66.5;
+  private final double downPosition = 0;
 
   public ClimbCommand(ClimbSubsystem climbSubsystem, BooleanSupplier bumper, BooleanSupplier trigger) {
     this.climbSubsystem = climbSubsystem;
