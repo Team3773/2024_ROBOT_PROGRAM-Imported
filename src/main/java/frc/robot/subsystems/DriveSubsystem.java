@@ -35,8 +35,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
   
   public void arcadeDrive(double speed, double rotation) {
-    double speedModifier = 0.85;
-    double rotationModifier = 0.8;
+    double speedModifier = 1.0;
+    double rotationModifier = 1.0;
     drive.arcadeDrive(speed * speedModifier, rotation * rotationModifier); 
     
   }

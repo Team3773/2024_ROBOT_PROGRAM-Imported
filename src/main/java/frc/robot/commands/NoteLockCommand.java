@@ -9,9 +9,10 @@ public class NoteLockCommand extends Command {
   /** Creates a new NoteLockCommand. */
   
  NoteLockSubsystem NoteLockSubsystem;
-  private final double lockSpeed = 1.0;
   BooleanSupplier xButton;
   BooleanSupplier yButton;
+  private final double lockedPosition = 0;
+  private final double unlockedPosition = 92.05;
 
   public NoteLockCommand(NoteLockSubsystem noteLockSubsystem, BooleanSupplier xButton, BooleanSupplier yButton) {
     this.NoteLockSubsystem = noteLockSubsystem;
@@ -28,13 +29,11 @@ public class NoteLockCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
+    //Run the Lock motor when X/Y are pushed. If neither button is pressed then stop the motors.
     if(xButton.getAsBoolean()){
-      NoteLockSubsystem.runLift(lockSpeed);
+      NoteLockSubsystem.goToPosition(lockedPosition);
     }else if(yButton.getAsBoolean()){
-      NoteLockSubsystem.runLift(-lockSpeed);
-    }else{
-      NoteLockSubsystem.stopLift();
+      NoteLockSubsystem.goToPosition(unlockedPosition);
     }
   }
 

@@ -8,10 +8,12 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class NoteIntakeCommand extends Command {
   /** Creates a new NoteIntakeCommand. */
   
- IntakeSubsystem intakeSubsystem;
-  private final double intakeSpeed = 0.45;
+  IntakeSubsystem intakeSubsystem;
+  private final double intakeSpeed = 1.0;
   BooleanSupplier aButton;
   BooleanSupplier bButton;
+  private final double defaultPosition = 0;
+  private final double otherPosition = .05;
 
   public NoteIntakeCommand(IntakeSubsystem intakeSubsystem, BooleanSupplier aButton, BooleanSupplier bButton) {
     this.intakeSubsystem = intakeSubsystem;
@@ -29,12 +31,10 @@ public class NoteIntakeCommand extends Command {
   @Override
   public void execute() {
     //Run the Intake motors when one of the bumpers are pushed. If neither bumper is pressed then stop the motors.
-    if(bButton.getAsBoolean()){
-      intakeSubsystem.runLift(intakeSpeed);
+    if(bButton.getAsBoolean()){      
+      intakeSubsystem.goToPosition(defaultPosition);
     }else if(aButton.getAsBoolean()){
-      intakeSubsystem.runLift(-intakeSpeed);
-    }else{
-      intakeSubsystem.stopLift();
+      intakeSubsystem.goToPosition(otherPosition);      
     }
   }
 
