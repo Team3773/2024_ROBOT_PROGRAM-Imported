@@ -53,47 +53,6 @@ public class NoteLockSubsystem extends SubsystemBase {
     m_pidController.setOutputRange(kMinOutput, kMaxOutput);
   }
 
-  
-
-    
-    // public void initDashboard() {
-    // SmartDashboard.putNumber(smartDashboardPrefix + "P Gain", kP);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "I Gain", kI);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "D Gain", kD);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "I Zone", kIz);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "Feed Forward", kFF);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "Max Output", kMaxOutput);
-    // SmartDashboard.putNumber(smartDashboardPrefix + "Min Output", kMinOutput);
-    // }
-    // public void periodic() {
-    // This method will be called once per scheduler run
-    
-    // read PID coefficients from SmartDashboard
-    // double p = SmartDashboard.getNumber(smartDashboardPrefix + "P Gain", 0);
-    // double i = SmartDashboard.getNumber(smartDashboardPrefix + "I Gain", 0);
-    // double d = SmartDashboard.getNumber(smartDashboardPrefix + "D Gain", 0);
-    // double iz = SmartDashboard.getNumber(smartDashboardPrefix + "I Zone", 0);
-    // double ff = SmartDashboard.getNumber(smartDashboardPrefix + "Feed Forward",
-    // 0);
-    // double max = SmartDashboard.getNumber(smartDashboardPrefix + "Max Output",
-    // 0);
-    // double min = SmartDashboard.getNumber(smartDashboardPrefix + "Min Output",
-    // 0);
-    // currentRotationSetpoint = SmartDashboard.getNumber(smartDashboardPrefix +
-    // "Set Rotations", 0);
-    
-    // if PID coefficients on SmartDashboard have changed, write new values to
-    // controller
-    // if((p != kP)) { m_pidController.setP(p); kP = p; }
-    // if((i != kI)) { m_pidController.setI(i); kI = i; }
-    // if((d != kD)) { m_pidController.setD(d); kD = d; }
-    // if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-    // if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
-    // if((max != kMaxOutput) || (min != kMinOutput)) {
-    // m_pidController.setOutputRange(min, max);
-    // kMinOutput = min; kMaxOutput = max;
-    // }
-  /* */
   @Override
   public void periodic() {
     m_pidController.setReference(currentRotationSetpoint, CANSparkBase.ControlType.kPosition);
