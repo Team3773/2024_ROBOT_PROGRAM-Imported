@@ -81,7 +81,7 @@ public class DriveTrain extends SubsystemBase {
     rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     leftFront.configSelectedFeedbackCoefficient(-1);
     rightFront.configSelectedFeedbackCoefficient(-1);
-    
+
     leftFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
     leftRear.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
     rightFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
@@ -106,11 +106,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private double getDistanceMeters(boolean left) {
-    double distanceConstant = 4096.0 * kGearRatio * Math.PI * kWheelDiameter;
+    double distanceConstant = kGearRatio * Math.PI * kWheelDiameter;
     if (left) {
-      return -leftFront.getSelectedSensorPosition(0) / distanceConstant;
+      return (-leftFront.getSelectedSensorPosition(0) /4096) * distanceConstant;
     } else {
-      return -rightFront.getSelectedSensorPosition(0) / distanceConstant;
+      return (-rightFront.getSelectedSensorPosition(0) /4096) * distanceConstant;
     }
   }
 
