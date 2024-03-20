@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -18,7 +19,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.RobotMap;
@@ -58,7 +59,7 @@ public class DriveTrain extends SubsystemBase {
    */
   public DriveTrain() {
     // pigeon.setYaw(0);
-    leftFront = new WPI_TalonSRX(RobotMap.m_leftMotorFollowerPort);    
+    leftFront = new WPI_TalonSRX(RobotMap.m_leftMotorFollowerPort);
     leftRear = new WPI_TalonSRX(RobotMap.m_leftMotorPort);
     rightFront = new WPI_TalonSRX(RobotMap.m_rightMotorFollowerPort);
     rightRear = new WPI_TalonSRX(RobotMap.m_rightMotorPort);
@@ -76,6 +77,9 @@ public class DriveTrain extends SubsystemBase {
     rightFront.configAllSettings(motorConfig);
     rightRear.configAllSettings(motorConfig);
 
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
     leftFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
     leftRear.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
     rightFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 30, 0.1));
@@ -88,25 +92,23 @@ public class DriveTrain extends SubsystemBase {
     // Invert the left side so both side drive forward with positive motor outputs
     leftFront.setInverted(false);
     leftRear.setInverted(false);
-    rightFront.setInverted(false);
-    rightRear.setInverted(false);
+    rightFront.setInverted(true);
+    rightRear.setInverted(true);
     // Put the front motors into the differential drive object. This will control
     // all 4 motors with
     // the rears set to follow the fronts
+    resetEncoders();
     m_drivetrain = new DifferentialDrive(leftFront, rightFront);
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), getDistanceMeters(true), getDistanceMeters(false));
   }
 
   private double getDistanceMeters(boolean left) {
+    double distanceConstant = 4096.0 * kGearRatio * Math.PI * kWheelDiameter;
     if (left) {
-      return leftFront.getSelectedSensorPosition() / 4096.0 * kGearRatio * Math.PI * kWheelDiameter;
+      return leftFront.getSelectedSensorPosition(0) / distanceConstant;
     } else {
-      return rightFront.getSelectedSensorPosition()
-          / 4096.0
-          * kGearRatio
-          * Math.PI
-          * kWheelDiameter;
+      return rightFront.getSelectedSensorPosition(0) / distanceConstant;
     }
   }
 
@@ -119,6 +121,7 @@ public class DriveTrain extends SubsystemBase {
     leftFront.setSelectedSensorPosition(0);
     rightFront.setSelectedSensorPosition(0);
   }
+
   /**
    * Returns the left encoder distance.
    *
@@ -164,6 +167,8 @@ public class DriveTrain extends SubsystemBase {
      * have anything to put here
      */
     odometry.update(new Rotation2d(), getDistanceMeters(true), getDistanceMeters(false));
+    SmartDashboard.putNumber("Left Drive Encoder", leftFront.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Right Drive Encoder", rightFront.getSelectedSensorPosition(0));
   }
 
   public static TalonSRXConfiguration generateSRXDriveMotorConfig() {
