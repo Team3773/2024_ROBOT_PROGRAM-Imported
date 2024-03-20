@@ -86,8 +86,8 @@ public class DriveTrain extends SubsystemBase {
     rightRear.follow(rightFront);
 
     // Invert the left side so both side drive forward with positive motor outputs
-    leftFront.setInverted(true);
-    leftRear.setInverted(true);
+    leftFront.setInverted(false);
+    leftRear.setInverted(false);
     rightFront.setInverted(false);
     rightRear.setInverted(false);
     // Put the front motors into the differential drive object. This will control

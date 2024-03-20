@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
       case Constants.driveStraighthalfm:
         return new DriveForward(m_robotContainer.driveTrain, .5);
       case Constants.driveStraight1m:
-        return new DriveForward(m_robotContainer.driveTrain, 1);
+        return new DriveForward(m_robotContainer.driveTrain, 10);
       case Constants.driveForaward1Sec:
         return new RunCommand(() -> m_robotContainer.driveTrain.arcadeDrive(-.5, 0))
             .withTimeout(1)
