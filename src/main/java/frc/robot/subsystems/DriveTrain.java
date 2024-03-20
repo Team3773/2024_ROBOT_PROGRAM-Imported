@@ -108,9 +108,9 @@ public class DriveTrain extends SubsystemBase {
   private double getDistanceMeters(boolean left) {
     double distanceConstant = 4096.0 * kGearRatio * Math.PI * kWheelDiameter;
     if (left) {
-      return leftFront.getSelectedSensorPosition(0) / distanceConstant;
+      return -leftFront.getSelectedSensorPosition(0) / distanceConstant;
     } else {
-      return rightFront.getSelectedSensorPosition(0) / distanceConstant;
+      return -rightFront.getSelectedSensorPosition(0) / distanceConstant;
     }
   }
 
@@ -168,9 +168,11 @@ public class DriveTrain extends SubsystemBase {
      * loop such as processing sensor data. Our drivetrain is simple so we don't
      * have anything to put here
      */
-    odometry.update(new Rotation2d(), getDistanceMeters(true), getDistanceMeters(false));
-    SmartDashboard.putNumber("Left Drive Encoder", leftFront.getSelectedSensorPosition(0));
-    SmartDashboard.putNumber("Right Drive Encoder", rightFront.getSelectedSensorPosition(0));
+    odometry.update(gyro.getRotation2d(), getDistanceMeters(true), getDistanceMeters(false));
+    SmartDashboard.putNumber("Robot Pose X", getRobotPose().getX());
+    SmartDashboard.putNumber("Robot Pose Y", getRobotPose().getY());
+    SmartDashboard.putNumber("Left Drive Encoder", -leftFront.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Right Drive Encoder", -rightFront.getSelectedSensorPosition(0));
   }
 
   public static TalonSRXConfiguration generateSRXDriveMotorConfig() {

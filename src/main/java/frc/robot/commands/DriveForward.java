@@ -22,12 +22,14 @@ public class DriveForward extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.resetEncoders();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(.3, 0);
+    driveTrain.arcadeDrive(.5, 0);
   }
 
   // Called once the command ends or is interrupted.
