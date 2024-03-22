@@ -13,7 +13,7 @@ public class NoteIntakeCommand extends Command {
   BooleanSupplier aButton;
   BooleanSupplier bButton;
   private final double defaultPosition = 0;
-  private final double otherPosition = .05;
+  private final double otherPosition = 18;
 
   public NoteIntakeCommand(IntakeSubsystem intakeSubsystem, BooleanSupplier aButton, BooleanSupplier bButton) {
     this.intakeSubsystem = intakeSubsystem;
@@ -34,7 +34,7 @@ public class NoteIntakeCommand extends Command {
     if(bButton.getAsBoolean()){      
       intakeSubsystem.goToPosition(defaultPosition);
     }else if(aButton.getAsBoolean()){
-      intakeSubsystem.goToPosition(otherPosition);      
+      intakeSubsystem.goToPosition(otherPosition);
     }
   }
 
