@@ -45,11 +45,12 @@ public class Robot extends TimedRobot {
   }
 
     public void SetupChooser() {
-    m_chooser.setDefaultOption("Do Nothing", "Do Nothing");
-    m_chooser.addOption(Constants.driveStraighthalfm, Constants.driveStraighthalfm);
-    m_chooser.addOption(Constants.driveStraight1m, Constants.driveStraight1m);
-    m_chooser.addOption(Constants.driveForaward1Sec, Constants.driveForaward1Sec);
-    SmartDashboard.putData("Auto choices", m_chooser);
+      m_chooser.setDefaultOption(Constants.driveStraight1m, Constants.driveStraight1m);
+
+      m_chooser.addOption("Do Nothing", "Do Nothing");
+      m_chooser.addOption(Constants.driveStraighthalfm, Constants.driveStraighthalfm);
+      m_chooser.addOption(Constants.driveForaward1Sec, Constants.driveForaward1Sec);
+      SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**

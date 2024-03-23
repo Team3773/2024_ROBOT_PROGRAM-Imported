@@ -47,8 +47,8 @@ public class RobotContainer {
                 System.out.println("Creating Commands");
                 driveTrain.setDefaultCommand(new TeleopDrive(
                                 driveTrain,
-                                () -> controller.getLeftX(),
-                                () -> controller.getLeftY()));
+                                () -> -controller.getLeftY(),
+                                () -> -controller.getLeftX()));
 
                 // Set Default Command for the Note Intake Subsystem
                 m_arm.setDefaultCommand(new NoteIntakeCommand(
