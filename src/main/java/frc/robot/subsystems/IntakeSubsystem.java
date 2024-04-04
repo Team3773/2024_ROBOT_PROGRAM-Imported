@@ -69,6 +69,10 @@ public class IntakeSubsystem extends SubsystemBase {
     currentRotationSetpoint = value;
   }
 
+  public double getCurrentPosition(){
+    return m_encoder.getPosition();
+  }
+
   // public void runLift(double speed) {
   //   System.out.println("Intake speed:" + speed * speedModifier);    
   //   m_armMotor.set(speed * speedModifier);

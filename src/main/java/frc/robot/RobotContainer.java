@@ -69,6 +69,7 @@ public class RobotContainer {
                 m_lock.setDefaultCommand(new NoteLockCommand(
                                 m_lock,
                                 () -> controller2.getXButton(),
-                                () -> controller2.getYButton()));
+                                () -> controller2.getYButton(),
+                                () -> m_arm.getCurrentPosition()));
         }
 }
