@@ -18,7 +18,7 @@ public class NoteLockCommand extends Command {
   DoubleSupplier intakePosition;
   private final double lockedPosition = 0;
   private final double unlockedPosition = 92.05;
-  private final double autoUnlockThreshold = 12;
+  private final double autoUnlockThreshold = 6;
 
   public NoteLockCommand(NoteLockSubsystem noteLockSubsystem, BooleanSupplier xButton, BooleanSupplier yButton, DoubleSupplier intakePosition) {
     this.NoteLockSubsystem = noteLockSubsystem;     
@@ -39,9 +39,9 @@ public class NoteLockCommand extends Command {
     //Run the Lock motor when X/Y are pushed. If neither button is pressed then stop the motors.
     
     SmartDashboard.putNumber("Current Arm Position", intakePosition.getAsDouble());
-    // if(intakePosition.getAsDouble() > autoUnlockThreshold){
-    //   NoteLockSubsystem.goToPosition(unlockedPosition);
-    // }
+    if(intakePosition.getAsDouble() > autoUnlockThreshold){
+    NoteLockSubsystem.goToPosition(unlockedPosition);
+     }
 
     if(xButton.getAsBoolean()){
       NoteLockSubsystem.goToPosition(lockedPosition);
