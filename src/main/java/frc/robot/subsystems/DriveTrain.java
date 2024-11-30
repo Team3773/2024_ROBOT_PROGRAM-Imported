@@ -10,7 +10,8 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
+import edu.wpi.first.util.sendable.Sendable;
+import java.lang.AutoCloseable;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -41,7 +42,6 @@ public class DriveTrain extends SubsystemBase {
   private double kGearRatio = 1;
   private double kWheelDiameter = Units.inchesToMeters(6);
   DifferentialDrive m_drivetrain;
-
   WPI_TalonSRX leftFront;
   WPI_TalonSRX leftRear;
   WPI_TalonSRX rightFront;
